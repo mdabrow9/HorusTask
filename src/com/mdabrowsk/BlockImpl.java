@@ -1,6 +1,8 @@
 package com.mdabrowsk;
 
-
+/**
+ * prosta implementacja interfejsu block
+ */
 class BlockImpl implements Block
 {
     public BlockImpl(String color, String material)

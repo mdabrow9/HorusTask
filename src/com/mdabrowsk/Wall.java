@@ -5,6 +5,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * implementacja interfejsu Structure
+ * stworzono listę bloków oraz konstruktor
+ * zostały zaimplementowane metody pomocnicze do obliczania wyników, bazują one na rekurencji
+ * metodę findBlocksByProperty() można wykorzystać do parametrów dodanych w przyszłości
+ *
+ * Ze wszytskich metod w interfejsach zostały usunięte niesparametryzowane typy i zastąpione sparametryzowanymi,
+ * ponieważ potrzebują one rzutowania i nie są one bezpieczne
+ */
 public class Wall implements Structure
 {
     private List<Block> blocks;

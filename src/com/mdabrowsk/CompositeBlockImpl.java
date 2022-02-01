@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-
+/**
+ * implementacja interfejsu CompositeBlock
+ * kolor zwraca jako połączenie nazw rozdzielonych separatorem
+ * materiał analogicznie
+ * wykorzystywany do implementacji jest wzorzec kompozyt
+ */
 class CompositeBlockImpl  implements CompositeBlock
 {
     public static final String SEPARATOR = "-";
