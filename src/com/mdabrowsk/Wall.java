@@ -7,23 +7,69 @@ import java.util.function.Function;
 
 public class Wall implements Structure
 {
-    private List blocks;
-    @Override
-    public Optional findBlockByColor(String color)
+    private List<Block> blocks;
+
+    public Wall(List<Block> blocks)
     {
-        return Optional.empty();
+        this.blocks = blocks;
     }
 
     @Override
-    public List findBlocksByMaterial(String material)
+    public Optional<Block> findBlockByColor(String color)
     {
-        return null;
+        return findBlocksByProperty(color, blocks, Block::getColor).stream().findAny();
     }
 
     @Override
     public int count()
     {
-        return 0;
+        return count(blocks);
     }
 
+
+    @Override
+    public List<Block> findBlocksByMaterial(String material)
+    {
+        return findBlocksByProperty(material, blocks, Block::getMaterial);
+    }
+
+
+
+    private int count(List<Block> blocks)
+    {
+        int count = 0;
+        for (Block block : blocks)
+        {
+            if(block instanceof CompositeBlock)
+            {
+                count += count(((CompositeBlock) block).getBlocks());
+            }
+            else
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private List<Block> findBlocksByProperty(String color, List<Block> blocks, Function<Block, String> getPropertyFunction)
+    {
+        List<Block> result = new ArrayList<>();
+        for(Block block : blocks)
+        {
+            if(block instanceof CompositeBlock)
+            {
+                result.addAll(findBlocksByProperty(color, ((CompositeBlock)block).getBlocks(), getPropertyFunction));
+
+            }
+            else
+            {
+                if(getPropertyFunction.apply(block).equals(color))
+                {
+                    result.add(block);
+                }
+            }
+        }
+        return result;
+    }
 }
